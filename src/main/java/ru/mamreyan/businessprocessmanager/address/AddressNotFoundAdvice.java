@@ -1,6 +1,5 @@
-package ru.mamreyan.businessprocessmanager;
+package ru.mamreyan.businessprocessmanager.address;
 
-import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,11 +7,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class PSQLExceptionAdvice {
+public class AddressNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler (PSQLException.class)
-    @ResponseStatus (HttpStatus.NOT_ACCEPTABLE)
-    String PSQLExceptionHandler(PSQLException ex) {
+    @ExceptionHandler (AddressNotFoundException.class)
+    @ResponseStatus (HttpStatus.NOT_FOUND)
+    String addressNotFoundHandler(AddressNotFoundException ex) {
         return ex.getMessage();
     }
 }

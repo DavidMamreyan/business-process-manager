@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ObjectNotValidAdvice {
     @ResponseBody
-    @ExceptionHandler(ObjectNotValidException.class)
-    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler (ObjectNotValidException.class)
+    @ResponseStatus (HttpStatus.NOT_ACCEPTABLE)
     String objectNotValidHandler(ObjectNotValidException ex) {
         return ex.getMessage();
     }

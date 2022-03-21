@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Collection;
-import java.util.Iterator;
+import ru.mamreyan.businessprocessmanager.employee.EmployeeRepository;
 
 @Configuration
 public class LoadDatabase {
