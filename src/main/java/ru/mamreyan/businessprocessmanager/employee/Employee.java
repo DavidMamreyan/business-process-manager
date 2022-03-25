@@ -5,7 +5,7 @@ import ru.mamreyan.businessprocessmanager.bank.Bank;
 import ru.mamreyan.businessprocessmanager.position.Position;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 @Entity
@@ -14,12 +14,12 @@ public class Employee {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull private String lastName;
-    @NotNull private String firstName;
-    private          String middleName;
-    private          Sex    sex;
-    @NotNull private Date   birthDate;
-    @NotNull private Date   employmentDate;
+    @NotNull private String            lastName;
+    @NotNull private String            firstName;
+    private          String            middleName;
+    private          Sex               sex;
+    @NotNull private GregorianCalendar birthDate;
+    @NotNull private GregorianCalendar employmentDate;
 
     @NotNull
     @OneToOne
@@ -34,7 +34,6 @@ public class Employee {
     private String workPhone;
     private String mobilePhone;
 
-    @NotNull
     @ManyToOne
     @JoinColumn (name = "head_id",
                  foreignKey = @ForeignKey (name = "head_id_fkey"))
@@ -52,69 +51,53 @@ public class Employee {
     }
 
     Employee(
-            String lastName,
-            String firstName,
-            String middleName,
-            Sex sex,
-            Date birthDate,
-            Date employmentDate,
-            Position position,
-            double salary,
-            String workPhone,
-            String mobilePhone,
-            Employee head,
-            Bank bank,
-            boolean active
+            EmployeeBuilder employeeBuilder
     ) {
-        if (lastName == null) {
+        if (employeeBuilder.lastName == null || employeeBuilder.lastName.isBlank()) {
             throw new IllegalArgumentException("last name is null");
         }
 
-        if (firstName == null) {
+        if (employeeBuilder.firstName == null || employeeBuilder.lastName.isBlank()) {
             throw new IllegalArgumentException("first name is null");
         }
 
-        if (sex == null) {
+        if (employeeBuilder.sex == null) {
             throw new IllegalArgumentException("sex is null");
         }
 
-        if (birthDate == null) {
+        if (employeeBuilder.birthDate == null) {
             throw new IllegalArgumentException("birth date is null");
         }
 
-        if (employmentDate == null) {
+        if (employeeBuilder.employmentDate == null) {
             throw new IllegalArgumentException("employment date is null");
         }
 
-        if (position == null) {
+        if (employeeBuilder.position == null) {
             throw new IllegalArgumentException("position is null");
         }
 
-        if (salary < 0.00d) {
+        if (employeeBuilder.salary < 0.00d) {
             throw new IllegalArgumentException("salary is negative");
         }
 
-        if (head == null) {
-            throw new IllegalArgumentException("head is null");
-        }
-
-        if (bank == null) {
+        if (employeeBuilder.bank == null) {
             throw new IllegalArgumentException("bank is null");
         }
 
-        this.lastName       = lastName;
-        this.firstName      = firstName;
-        this.middleName     = middleName;
-        this.sex            = sex;
-        this.birthDate      = birthDate;
-        this.employmentDate = employmentDate;
-        this.position       = position;
-        this.salary         = salary;
-        this.workPhone      = workPhone;
-        this.mobilePhone    = mobilePhone;
-        this.head           = head;
-        this.bank           = bank;
-        this.active         = active;
+        this.lastName       = employeeBuilder.lastName;
+        this.firstName      = employeeBuilder.firstName;
+        this.middleName     = employeeBuilder.middleName;
+        this.sex            = employeeBuilder.sex;
+        this.birthDate      = employeeBuilder.birthDate;
+        this.employmentDate = employeeBuilder.employmentDate;
+        this.position       = employeeBuilder.position;
+        this.salary         = employeeBuilder.salary;
+        this.workPhone      = employeeBuilder.workPhone;
+        this.mobilePhone    = employeeBuilder.mobilePhone;
+        this.head           = employeeBuilder.head;
+        this.bank           = employeeBuilder.bank;
+        this.active         = employeeBuilder.active;
     }
 
     public Long getId() {
@@ -134,7 +117,7 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        if (lastName == null) {
+        if (lastName == null || lastName.isBlank()) {
             throw new IllegalArgumentException("last name is null");
         }
 
@@ -146,7 +129,7 @@ public class Employee {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName == null) {
+        if (firstName == null || firstName.isBlank()) {
             throw new IllegalArgumentException("first name is null");
         }
 
@@ -173,11 +156,11 @@ public class Employee {
         this.sex = sex;
     }
 
-    public Date getBirthDate() {
+    public GregorianCalendar getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(GregorianCalendar birthDate) {
         if (birthDate == null) {
             throw new IllegalArgumentException("birth date is null");
         }
@@ -185,11 +168,11 @@ public class Employee {
         this.birthDate = birthDate;
     }
 
-    public Date getEmploymentDate() {
+    public GregorianCalendar getEmploymentDate() {
         return employmentDate;
     }
 
-    public void setEmploymentDate(Date employmentDate) {
+    public void setEmploymentDate(GregorianCalendar employmentDate) {
         if (employmentDate == null) {
             throw new IllegalArgumentException("employment date is null");
         }
@@ -242,10 +225,6 @@ public class Employee {
     }
 
     public void setHead(Employee head) {
-        if (head == null) {
-            throw new IllegalArgumentException("head is null");
-        }
-
         this.head = head;
     }
 
@@ -379,20 +358,132 @@ public class Employee {
 
     @Override
     public String toString() {
-        return ("Employee №" + this.id + ": {" + "\n") +
-               ("lastName = " + this.lastName + "\n") +
-               ("firstName = " + this.firstName + "\n") +
-               ("middleName = " + this.middleName + "\n") +
-               ("sex = " + this.sex + "\n") +
-               ("birthDate = " + this.birthDate.toString() + "\n") +
-               ("employmentDate = " + this.employmentDate.toString() + "\n") +
-               ("position = " + this.position.toString() + "\n") +
-               ("salary = " + this.salary + "\n") +
-               ("workPhone = " + this.workPhone + "\n") +
-               ("mobilePhone = " + this.mobilePhone + "\n") +
-               ("head = " + this.head.toString() + "\n") +
-               ("bank = " + this.bank.toString() + "\n") +
-               ("active = " + this.active + "\n") +
-               "}";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        return (stringBuilder
+                .append("Employee №")
+                .append(this.id)
+                .append(": {\nlastName = ")
+                .append(this.lastName)
+                .append(",\nfirstName = ")
+                .append(this.firstName)
+                .append(",\nmiddleName = ")
+                .append(this.middleName)
+                .append(",\nsex = ")
+                .append(this.sex)
+                .append(",\nbirthDate = ")
+                .append(this.birthDate.toString())
+                .append(",\nemploymentDate = ")
+                .append(this.employmentDate.toString())
+                .append(",\nposition = ")
+                .append(this.position.toString())
+                .append(",\nsalary = ")
+                .append(this.salary)
+                .append(",\nworkPhone = ")
+                .append(this.workPhone)
+                .append(",\nmobilePhone = ")
+                .append(this.mobilePhone)
+                .append(",\nhead = ")
+                .append(this.head.toString())
+                .append(",\nbank = ")
+                .append(this.bank.toString())
+                .append(",\nactive = ")
+                .append(this.active)
+                .append("\n}")).toString();
+    }
+
+    public static class EmployeeBuilder {
+        private String            lastName;
+        private String            firstName;
+        private String            middleName;
+        private Sex               sex;
+        private GregorianCalendar birthDate;
+        private GregorianCalendar employmentDate;
+        private Position          position;
+        private double            salary;
+        private String            workPhone;
+        private String            mobilePhone;
+        private Employee          head;
+        private Bank              bank;
+        private boolean           active = true;
+
+        public EmployeeBuilder() {
+            super();
+        }
+
+        public EmployeeBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public EmployeeBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public EmployeeBuilder middleName(String middleName) {
+            this.middleName = middleName;
+            return this;
+        }
+
+        public EmployeeBuilder sex(Sex sex) {
+            this.sex = sex;
+            return this;
+        }
+
+        public EmployeeBuilder birthDate(GregorianCalendar birthDate) {
+            this.birthDate = birthDate;
+            return this;
+        }
+
+        public EmployeeBuilder employmentDate(GregorianCalendar employmentDate) {
+            this.employmentDate = employmentDate;
+            return this;
+        }
+
+        public EmployeeBuilder position(Position position) {
+            this.position = position;
+            return this;
+        }
+
+        public EmployeeBuilder salary(double salary) {
+            this.salary = salary;
+            return this;
+        }
+
+        public EmployeeBuilder workPhone(String workPhone) {
+            this.workPhone = workPhone;
+            return this;
+        }
+
+        public EmployeeBuilder mobilePhone(String mobilePhone) {
+            this.mobilePhone = mobilePhone;
+            return this;
+        }
+
+        public EmployeeBuilder head(Employee head) {
+            this.head = head;
+            return this;
+        }
+
+        public EmployeeBuilder bank(Bank bank) {
+            this.bank = bank;
+            return this;
+        }
+
+        public EmployeeBuilder active(boolean active) {
+            this.active = active;
+            return this;
+        }
+
+        public Employee build() {
+            Employee employee = new Employee(this);
+
+            if (employee.isNotValid()) {
+                throw new EmployeeNotValidException();
+            }
+
+            return employee;
+        }
     }
 }

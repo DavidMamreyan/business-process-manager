@@ -5,7 +5,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.mamreyan.businessprocessmanager.ObjectNotValidException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,7 +63,7 @@ public class AddressController {
                     Address newAddress
     ) {
         if (newAddress.isNotValid()) {
-            throw new ObjectNotValidException();
+            throw new AddressNotValidException();
         }
 
         EntityModel<Address> entityModel = assembler.toModel(addressRepository.save(newAddress));
@@ -80,7 +79,7 @@ public class AddressController {
                     Address newAddress
     ) {
         if (newAddress.isNotValid()) {
-            throw new ObjectNotValidException();
+            throw new AddressNotValidException();
         }
 
         Address updatedAddress = addressRepository.findById(id).map(address -> {

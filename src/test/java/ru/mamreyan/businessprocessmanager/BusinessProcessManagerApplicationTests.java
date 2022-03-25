@@ -9,5 +9,4 @@ class BusinessProcessManagerApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

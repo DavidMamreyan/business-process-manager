@@ -1,6 +1,6 @@
 package ru.mamreyan.businessprocessmanager.employee;
 
-enum Sex {
+public enum Sex {
     MALE,
     FEMALE,
     OTHER

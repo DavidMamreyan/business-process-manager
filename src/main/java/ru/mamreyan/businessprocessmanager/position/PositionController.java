@@ -5,7 +5,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.mamreyan.businessprocessmanager.ObjectNotValidException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,7 +63,7 @@ public class PositionController {
                     Position newPosition
     ) {
         if (newPosition.isNotValid()) {
-            throw new ObjectNotValidException();
+            throw new PositionNotValidException();
         }
 
         EntityModel<Position> entityModel = assembler.toModel(positionRepository.save(newPosition));
@@ -80,7 +79,7 @@ public class PositionController {
                     Position newPosition
     ) {
         if (newPosition.isNotValid()) {
-            throw new ObjectNotValidException();
+            throw new PositionNotValidException();
         }
 
         Position updatedPosition = positionRepository.findById(id).map(position -> {

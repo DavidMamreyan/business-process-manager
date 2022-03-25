@@ -25,14 +25,13 @@ public class Address {
     Address() {
     }
 
-    Address(
+    public Address(
             String country,
             String region,
             String locality,
             String street,
             String building,
-            String apartment,
-            boolean active
+            String apartment
     ) {
         if (country == null) {
             throw new IllegalArgumentException("country is null");
@@ -60,7 +59,7 @@ public class Address {
         this.street    = street;
         this.building  = building;
         this.apartment = apartment;
-        this.active    = active;
+        this.active    = true;
     }
 
     public Long getId() {
@@ -228,14 +227,25 @@ public class Address {
 
     @Override
     public String toString() {
-        return ("Address №" + this.id + ": {" + "\n") +
-               ("country = " + this.country + "\n") +
-               ("region = " + this.region + "\n") +
-               ("locality = " + this.locality + "\n") +
-               ("street = " + this.street + "\n") +
-               ("building = " + this.building + "\n") +
-               ("apartment = " + this.apartment + "\n") +
-               ("active = " + this.active + "\n") +
-               "}";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        return (stringBuilder
+                .append("Address №")
+                .append(this.id)
+                .append(": {\ncountry = ")
+                .append(this.country)
+                .append(",\nregion = ")
+                .append(this.region)
+                .append(",\nlocality = ")
+                .append(this.locality)
+                .append(",\nstreet = ")
+                .append(this.street)
+                .append(",\nbuilding = ")
+                .append(this.building)
+                .append(",\napartment = ")
+                .append(this.apartment)
+                .append(",\nactive = ")
+                .append(this.active)
+                .append("\n}")).toString();
     }
 }

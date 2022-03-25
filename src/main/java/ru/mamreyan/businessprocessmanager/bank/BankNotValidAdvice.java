@@ -1,4 +1,4 @@
-package ru.mamreyan.businessprocessmanager;
+package ru.mamreyan.businessprocessmanager.bank;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class ObjectNotValidAdvice {
+class BankNotValidAdvice {
     @ResponseBody
-    @ExceptionHandler (ObjectNotValidException.class)
+    @ExceptionHandler (BankNotValidException.class)
     @ResponseStatus (HttpStatus.NOT_ACCEPTABLE)
-    String objectNotValidHandler(ObjectNotValidException ex) {
+    String bankNotValidHandler(BankNotValidException ex) {
         return ex.getMessage();
     }
 }

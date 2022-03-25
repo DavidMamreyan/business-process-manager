@@ -20,16 +20,15 @@ public class Position {
     Position() {
     }
 
-    Position(
-            String name,
-            boolean active
+    public Position(
+            String name
     ) {
         if (name == null) {
             throw new IllegalArgumentException("name is null");
         }
 
         this.name   = name;
-        this.active = active;
+        this.active = true;
     }
 
     public Long getId() {
@@ -110,9 +109,15 @@ public class Position {
 
     @Override
     public String toString() {
-        return ("Position №" + this.id + ": {" + "\n") +
-               ("name = " + this.name + "\n") +
-               ("active = " + this.active + "\n") +
-               "}";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        return (stringBuilder
+                .append("Position №")
+                .append(this.id)
+                .append(": {\nname = ")
+                .append(this.name)
+                .append("\nactive = ")
+                .append(this.active)
+                .append("\n}")).toString();
     }
 }

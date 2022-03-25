@@ -5,7 +5,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.mamreyan.businessprocessmanager.ObjectNotValidException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,7 +63,7 @@ public class BankController {
                     Bank newBank
     ) {
         if (newBank.isNotValid()) {
-            throw new ObjectNotValidException();
+            throw new BankNotValidException();
         }
 
         EntityModel<Bank> entityModel = assembler.toModel(bankRepository.save(newBank));
@@ -80,7 +79,7 @@ public class BankController {
                     Bank newBank
     ) {
         if (newBank.isNotValid()) {
-            throw new ObjectNotValidException();
+            throw new BankNotValidException();
         }
 
         Bank updatedBank = bankRepository.findById(id).map(bank -> {

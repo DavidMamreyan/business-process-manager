@@ -26,11 +26,10 @@ public class Bank {
     Bank() {
     }
 
-    Bank(
+    public Bank(
             String name,
             String bik,
-            Address address,
-            boolean active
+            Address address
     ) {
         if (name == null) {
             throw new IllegalArgumentException("name is null");
@@ -47,7 +46,7 @@ public class Bank {
         this.name    = name;
         this.bik     = bik;
         this.address = address;
-        this.active  = active;
+        this.active  = true;
     }
 
     public Long getId() {
@@ -163,11 +162,19 @@ public class Bank {
 
     @Override
     public String toString() {
-        return ("Bank №" + this.id + ": {" + "\n") +
-               ("name = " + this.name + "\n") +
-               ("bik = " + this.bik + "\n") +
-               ("address = " + this.address.toString() + "\n") +
-               ("active = " + this.active + "\n") +
-               "}";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        return (stringBuilder
+                .append("Bank №")
+                .append(this.id)
+                .append(": {\nname = ")
+                .append(this.name)
+                .append(",\nbik = ")
+                .append(this.bik)
+                .append(",\naddress = ")
+                .append(this.address.toString())
+                .append(",\nactive = ")
+                .append(this.active)
+                .append("\n}")).toString();
     }
 }
