@@ -63,7 +63,7 @@ public class EmployeeController {
                     Employee newEmployee
     ) {
         if (newEmployee.isNotValid()) {
-            throw new EmployeeNotValidException();
+            throw new EmployeeNotValidException(newEmployee);
         }
 
         EntityModel<Employee> entityModel = assembler.toModel(employeeRepository.save(newEmployee));
@@ -79,7 +79,7 @@ public class EmployeeController {
                     Employee newEmployee
     ) {
         if (newEmployee.isNotValid()) {
-            throw new EmployeeNotValidException();
+            throw new EmployeeNotValidException(newEmployee);
         }
 
         Employee updatedEmployee = employeeRepository.findById(id).map(employee -> {

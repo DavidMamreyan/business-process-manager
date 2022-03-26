@@ -63,7 +63,7 @@ public class AddressController {
                     Address newAddress
     ) {
         if (newAddress.isNotValid()) {
-            throw new AddressNotValidException();
+            throw new AddressNotValidException(newAddress);
         }
 
         EntityModel<Address> entityModel = assembler.toModel(addressRepository.save(newAddress));
@@ -79,7 +79,7 @@ public class AddressController {
                     Address newAddress
     ) {
         if (newAddress.isNotValid()) {
-            throw new AddressNotValidException();
+            throw new AddressNotValidException(newAddress);
         }
 
         Address updatedAddress = addressRepository.findById(id).map(address -> {

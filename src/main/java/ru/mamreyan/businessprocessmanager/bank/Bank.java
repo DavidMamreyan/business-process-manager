@@ -172,7 +172,7 @@ public class Bank {
                 .append(",\nbik = ")
                 .append(this.bik)
                 .append(",\naddress = ")
-                .append(this.address.toString())
+                .append(this.address != null ? this.address.toString() : "null")
                 .append(",\nactive = ")
                 .append(this.active)
                 .append("\n}")).toString();

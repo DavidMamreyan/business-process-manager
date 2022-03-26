@@ -256,7 +256,6 @@ public class Employee {
                employmentDate == null ||
                position == null ||
                salary < 0.00d ||
-               head == null ||
                bank == null;
     }
 
@@ -372,9 +371,9 @@ public class Employee {
                 .append(",\nsex = ")
                 .append(this.sex)
                 .append(",\nbirthDate = ")
-                .append(this.birthDate.toString())
+                .append(this.birthDate.toInstant())
                 .append(",\nemploymentDate = ")
-                .append(this.employmentDate.toString())
+                .append(this.employmentDate.toInstant())
                 .append(",\nposition = ")
                 .append(this.position.toString())
                 .append(",\nsalary = ")
@@ -384,7 +383,7 @@ public class Employee {
                 .append(",\nmobilePhone = ")
                 .append(this.mobilePhone)
                 .append(",\nhead = ")
-                .append(this.head.toString())
+                .append(this.head != null ? this.head.toString() : "null")
                 .append(",\nbank = ")
                 .append(this.bank.toString())
                 .append(",\nactive = ")
@@ -480,7 +479,7 @@ public class Employee {
             Employee employee = new Employee(this);
 
             if (employee.isNotValid()) {
-                throw new EmployeeNotValidException();
+                throw new EmployeeNotValidException(employee);
             }
 
             return employee;

@@ -63,7 +63,7 @@ public class PositionController {
                     Position newPosition
     ) {
         if (newPosition.isNotValid()) {
-            throw new PositionNotValidException();
+            throw new PositionNotValidException(newPosition);
         }
 
         EntityModel<Position> entityModel = assembler.toModel(positionRepository.save(newPosition));
@@ -79,7 +79,7 @@ public class PositionController {
                     Position newPosition
     ) {
         if (newPosition.isNotValid()) {
-            throw new PositionNotValidException();
+            throw new PositionNotValidException(newPosition);
         }
 
         Position updatedPosition = positionRepository.findById(id).map(position -> {

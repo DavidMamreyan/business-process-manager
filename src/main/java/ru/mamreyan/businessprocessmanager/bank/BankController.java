@@ -63,7 +63,7 @@ public class BankController {
                     Bank newBank
     ) {
         if (newBank.isNotValid()) {
-            throw new BankNotValidException();
+            throw new BankNotValidException(newBank);
         }
 
         EntityModel<Bank> entityModel = assembler.toModel(bankRepository.save(newBank));
@@ -79,7 +79,7 @@ public class BankController {
                     Bank newBank
     ) {
         if (newBank.isNotValid()) {
-            throw new BankNotValidException();
+            throw new BankNotValidException(newBank);
         }
 
         Bank updatedBank = bankRepository.findById(id).map(bank -> {

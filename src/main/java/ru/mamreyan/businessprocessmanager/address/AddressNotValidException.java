@@ -1,7 +1,7 @@
 package ru.mamreyan.businessprocessmanager.address;
 
 class AddressNotValidException extends RuntimeException {
-    public AddressNotValidException() {
-        super("Address is not valid");
+    public AddressNotValidException(Address address) {
+        super("Address is not valid: " + address.toString());
     }
 }
