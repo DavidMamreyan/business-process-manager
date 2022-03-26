@@ -7,6 +7,7 @@ import ru.mamreyan.businessprocessmanager.position.Position;
 import javax.persistence.*;
 import java.util.GregorianCalendar;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 public class Employee {
@@ -248,9 +249,15 @@ public class Employee {
         this.active = active;
     }
 
+    public String getFullName() {
+        return new StringJoiner(" ").add(lastName).add(firstName).add(middleName).toString();
+    }
+
     public boolean isNotValid() {
         return lastName == null ||
+               lastName.isBlank() ||
                firstName == null ||
+               firstName.isBlank() ||
                sex == null ||
                birthDate == null ||
                employmentDate == null ||
@@ -259,7 +266,7 @@ public class Employee {
                bank == null;
     }
 
-    public boolean is(Object object) {
+    public boolean same(Object object) {
         if (this == object) {
             return true;
         }
@@ -375,7 +382,7 @@ public class Employee {
                 .append(",\nemploymentDate = ")
                 .append(this.employmentDate.toInstant())
                 .append(",\nposition = ")
-                .append(this.position.toString())
+                .append(this.position)
                 .append(",\nsalary = ")
                 .append(this.salary)
                 .append(",\nworkPhone = ")
@@ -383,9 +390,9 @@ public class Employee {
                 .append(",\nmobilePhone = ")
                 .append(this.mobilePhone)
                 .append(",\nhead = ")
-                .append(this.head != null ? this.head.toString() : "null")
+                .append(this.head)
                 .append(",\nbank = ")
-                .append(this.bank.toString())
+                .append(this.bank)
                 .append(",\nactive = ")
                 .append(this.active)
                 .append("\n}")).toString();

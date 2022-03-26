@@ -33,23 +33,23 @@ public class Address {
             String building,
             String apartment
     ) {
-        if (country == null) {
+        if (country == null || country.isBlank()) {
             throw new IllegalArgumentException("country is null");
         }
 
-        if (region == null) {
+        if (region == null || region.isBlank()) {
             throw new IllegalArgumentException("region is null");
         }
 
-        if (locality == null) {
+        if (locality == null || locality.isBlank()) {
             throw new IllegalArgumentException("locality is null");
         }
 
-        if (street == null) {
+        if (street == null || street.isBlank()) {
             throw new IllegalArgumentException("street is null");
         }
 
-        if (building == null) {
+        if (building == null || building.isBlank()) {
             throw new IllegalArgumentException("building is null");
         }
 
@@ -75,7 +75,7 @@ public class Address {
     }
 
     public void setCountry(String country) {
-        if (country == null) {
+        if (country == null || country.isBlank()) {
             throw new IllegalArgumentException("country is null");
         }
 
@@ -87,7 +87,7 @@ public class Address {
     }
 
     public void setRegion(String region) {
-        if (region == null) {
+        if (region == null || region.isBlank()) {
             throw new IllegalArgumentException("region is null");
         }
 
@@ -99,7 +99,7 @@ public class Address {
     }
 
     public void setLocality(String locality) {
-        if (locality == null) {
+        if (locality == null || locality.isBlank()) {
             throw new IllegalArgumentException("locality is null");
         }
 
@@ -111,7 +111,7 @@ public class Address {
     }
 
     public void setStreet(String street) {
-        if (street == null) {
+        if (street == null || street.isBlank()) {
             throw new IllegalArgumentException("street is null");
         }
 
@@ -123,7 +123,7 @@ public class Address {
     }
 
     public void setBuilding(String building) {
-        if (building == null) {
+        if (building == null || building.isBlank()) {
             throw new IllegalArgumentException("building is null");
         }
 
@@ -148,36 +148,6 @@ public class Address {
 
     public boolean isNotValid() {
         return country == null || region == null || locality == null || street == null || building == null;
-    }
-
-    public boolean is(Object object) {
-        if (this == object) {
-            return true;
-        }
-
-        if (!(object instanceof Address address)) {
-            return false;
-        }
-
-        return Objects.equals(
-                this.country,
-                address.country
-        ) && Objects.equals(
-                this.region,
-                address.region
-        ) && Objects.equals(
-                this.locality,
-                address.locality
-        ) && Objects.equals(
-                this.street,
-                address.street
-        ) && Objects.equals(
-                this.building,
-                address.building
-        ) && Objects.equals(
-                this.apartment,
-                address.apartment
-        );
     }
 
     @Override

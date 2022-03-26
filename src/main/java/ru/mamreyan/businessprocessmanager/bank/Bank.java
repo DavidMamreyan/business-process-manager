@@ -31,11 +31,11 @@ public class Bank {
             String bik,
             Address address
     ) {
-        if (name == null) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name is null");
         }
 
-        if (bik == null) {
+        if (bik == null || bik.isBlank()) {
             throw new IllegalArgumentException("bik is null");
         }
 
@@ -66,7 +66,7 @@ public class Bank {
     }
 
     public void setName(String name) {
-        if (name == null) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name is null");
         }
 
@@ -78,7 +78,7 @@ public class Bank {
     }
 
     public void setBik(String bik) {
-        if (bik == null) {
+        if (bik == null || bik.isBlank()) {
             throw new IllegalArgumentException("bik is null");
         }
 
@@ -109,7 +109,7 @@ public class Bank {
         return name == null || bik == null || address == null;
     }
 
-    public boolean is(Object object) {
+    public boolean same(Object object) {
         if (this == object) {
             return true;
         }
@@ -172,7 +172,7 @@ public class Bank {
                 .append(",\nbik = ")
                 .append(this.bik)
                 .append(",\naddress = ")
-                .append(this.address != null ? this.address.toString() : "null")
+                .append(this.address)
                 .append(",\nactive = ")
                 .append(this.active)
                 .append("\n}")).toString();

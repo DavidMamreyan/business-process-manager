@@ -23,7 +23,7 @@ public class Position {
     public Position(
             String name
     ) {
-        if (name == null) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name is null");
         }
 
@@ -48,7 +48,7 @@ public class Position {
     }
 
     public void setName(String name) {
-        if (name == null) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name is null");
         }
 
@@ -65,21 +65,6 @@ public class Position {
 
     public boolean isNotValid() {
         return name == null;
-    }
-
-    public boolean is(Object object) {
-        if (this == object) {
-            return true;
-        }
-
-        if (!(object instanceof Position position)) {
-            return false;
-        }
-
-        return Objects.equals(
-                this.name,
-                position.name
-        );
     }
 
     @Override
